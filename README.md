@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -91,9 +92,9 @@
                 Invalid username or password
             </div>
 
-            <!-- Quick Role Select Buttons with Direct Login / Auto-Fill Support -->
+            <!-- Quick Role Select Buttons -->
             <div class="mb-5">
-                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider text-center mb-2.5">Select Role / Quick Login</p>
+                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider text-center mb-2.5">Select Role</p>
                 <div class="grid grid-cols-2 gap-2.5">
                     <button type="button" id="role-btn-admin" onclick="selectLoginRole('admin')" class="cursor-pointer py-2.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-bold rounded-xl transition flex items-center justify-center gap-1.5 shadow-sm active:scale-95">
                         <i class="ph-fill ph-shield-check text-slate-500 text-base" id="role-icon-admin"></i> Admin
@@ -108,11 +109,11 @@
             <form id="form-login" onsubmit="handleLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-sm font-semibold text-slate-700 mb-1">Username</label>
-                    <input type="text" id="login-user" required class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
+                    <input type="text" id="login-user" required placeholder="Enter username" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-slate-700 mb-1">Password</label>
-                    <input type="password" id="login-pass" required class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
+                    <input type="password" id="login-pass" required placeholder="Enter password" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
                 </div>
                 
                 <!-- Forgot Password Trigger -->
@@ -146,17 +147,23 @@
                     <i class="ph ph-box-arrow-down text-xl"></i>
                     <span>Material In</span>
                 </button>
-                <button type="button" onclick="switchTab('material-out')" id="nav-material-out" class="nav-btn whitespace-nowrap md:w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white font-medium transition-colors text-left shrink-0">
-                    <i class="ph ph-truck text-xl"></i>
-                    <span>Material Out</span>
+                <button type="button" onclick="switchTab('material-out')" id="nav-material-out" class="nav-btn whitespace-nowrap md:w-full flex items-center justify-between px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white font-medium transition-colors text-left shrink-0">
+                    <div class="flex items-center gap-3">
+                        <i class="ph ph-truck text-xl"></i>
+                        <span>Material Out</span>
+                    </div>
+                    <span id="nav-out-badge" class="hidden px-2 py-0.5 text-[10px] font-bold bg-emerald-500 text-white rounded-full">0</span>
                 </button>
                 <button type="button" onclick="switchTab('dispatch-history')" id="nav-dispatch-history" class="nav-btn whitespace-nowrap md:w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white font-medium transition-colors text-left shrink-0">
                     <i class="ph ph-clock-counter-clockwise text-xl"></i>
                     <span>Dispatch History</span>
                 </button>
-                <button type="button" onclick="switchTab('approvals')" id="nav-approvals" class="nav-btn hidden whitespace-nowrap md:w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white font-medium transition-colors text-left shrink-0">
-                    <i class="ph ph-check-square text-xl"></i>
-                    <span>Approvals</span>
+                <button type="button" onclick="switchTab('approvals')" id="nav-approvals" class="nav-btn hidden whitespace-nowrap md:w-full flex items-center justify-between px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white font-medium transition-colors text-left shrink-0">
+                    <div class="flex items-center gap-3">
+                        <i class="ph ph-check-square text-xl"></i>
+                        <span>Approvals</span>
+                    </div>
+                    <span id="nav-approvals-badge" class="hidden px-2 py-0.5 text-[10px] font-bold bg-rose-500 text-white rounded-full">0</span>
                 </button>
                 <button type="button" onclick="switchTab('user-management')" id="nav-user-management" class="nav-btn hidden whitespace-nowrap md:w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white font-medium transition-colors text-left shrink-0">
                     <i class="ph ph-users-three text-xl"></i>
@@ -367,8 +374,9 @@
                     </div>
                 </div>
 
-                <!-- Tab: Material Out -->
-                <div id="tab-material-out" class="tab-content w-full max-w-4xl mx-auto hidden pb-16">
+                <!-- Tab: Material Out (Dispatch Section) -->
+                <div id="tab-material-out" class="tab-content w-full max-w-5xl mx-auto hidden space-y-6 pb-16">
+                    <!-- Request Dispatch Form -->
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
                         <div class="flex items-center gap-3 mb-6">
                             <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center">
@@ -376,7 +384,7 @@
                             </div>
                             <div>
                                 <h3 class="text-xl font-bold text-slate-800">Dispatch Material</h3>
-                                <p class="text-sm text-slate-500">Provide recipient details and choose dispatch mode.</p>
+                                <p class="text-sm text-slate-500">Provide recipient details and request dispatch approval.</p>
                             </div>
                         </div>
 
@@ -461,9 +469,39 @@
                             </div>
 
                             <button type="submit" class="w-full mt-4 bg-slate-900 text-white font-semibold py-3.5 px-4 rounded-xl hover:bg-slate-800 transition duration-200 flex justify-center items-center gap-2 shadow-sm">
-                                <i class="ph ph-printer text-lg"></i> Request Dispatch
+                                <i class="ph ph-paper-plane-tilt text-lg"></i> Submit Dispatch Request for Admin Approval
                             </button>
                         </form>
+                    </div>
+
+                    <!-- Store Manager & Admin Gatepass Print Section (Shows Pending & Approved Dispatches) -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="px-6 py-4 border-b border-slate-200 bg-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                                    <i class="ph-fill ph-printer text-lg"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-slate-800 text-base">Dispatch Status & Gatepass Print Queue</h3>
+                                    <p class="text-xs text-slate-500">Once Admin approves a dispatch request, the <strong>Print Gatepass</strong> button becomes available here for the Store Manager.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse min-w-[750px]">
+                                <thead>
+                                    <tr class="bg-white text-slate-500 text-xs uppercase tracking-wider border-b border-slate-200">
+                                        <th class="px-6 py-3.5 font-semibold">Equipment & S/N</th>
+                                        <th class="px-6 py-3.5 font-semibold">Client & Location</th>
+                                        <th class="px-6 py-3.5 font-semibold">Approval Status</th>
+                                        <th class="px-6 py-3.5 font-semibold text-right">Gatepass Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="store-dispatch-queue-body" class="divide-y divide-slate-100 bg-white">
+                                    <!-- Populated dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
@@ -473,7 +511,7 @@
                         <div class="px-6 py-4 border-b border-slate-200 bg-slate-50 flex flex-col md:flex-row justify-between items-center gap-4">
                             <div>
                                 <h3 class="font-bold text-slate-800 text-lg">Dispatch History Log</h3>
-                                <p class="text-xs text-slate-500">Filter and audit all past dispatched equipment date-wise.</p>
+                                <p class="text-xs text-slate-500">Filter, audit, and reprint Gatepasses for all approved dispatches.</p>
                             </div>
                             <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
                                 <div class="flex items-center gap-2 text-xs">
@@ -511,7 +549,10 @@
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
                         <div class="px-6 py-4 border-b border-slate-200 bg-slate-50 flex items-center gap-3">
                             <i class="ph-fill ph-shield-check text-blue-600 text-xl"></i>
-                            <h3 class="font-bold text-slate-800">Pending Dispatch Approvals</h3>
+                            <div>
+                                <h3 class="font-bold text-slate-800">Pending Dispatch Approvals (Admin Only)</h3>
+                                <p class="text-xs text-slate-500">Approving an item unlocks the Gatepass Print button for the Store Manager in the Material Out section.</p>
+                            </div>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left border-collapse">
@@ -619,35 +660,67 @@
         </div>
     </div>
 
-    <!-- Forgot Password Recovery Modal (Passcode: 8317) -->
+    <!-- Forgot Password Recovery Modal (Passcode: 8317 -> Shows Usernames & Passwords) -->
     <div id="forgot-password-modal" class="hidden fixed inset-0 z-[120] bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full space-y-4">
+        <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-md w-full space-y-4">
             <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center mx-auto text-2xl">
                 <i class="ph-fill ph-key"></i>
             </div>
             <div>
-                <h3 class="font-bold text-slate-800 text-lg text-center">Reset Admin Password</h3>
-                <p class="text-xs text-slate-500 text-center mt-0.5">Enter Master Recovery PIN (8317) to reset credentials</p>
+                <h3 class="font-bold text-slate-800 text-lg text-center">Recover User & Password</h3>
+                <p class="text-xs text-slate-500 text-center mt-0.5" id="recovery-subtitle">Enter Master Recovery PIN (8317) to view credentials</p>
             </div>
-            <div id="recovery-error" class="hidden text-rose-600 text-xs font-semibold text-center">Incorrect Recovery PIN.</div>
-            <form onsubmit="handlePasswordRecovery(event)" class="space-y-3">
+            <div id="recovery-error" class="hidden text-rose-600 text-xs font-semibold text-center bg-rose-50 py-2 rounded-lg border border-rose-200">Incorrect Recovery PIN. Please try again.</div>
+
+            <!-- Step 1: Enter PIN 8317 -->
+            <form id="recovery-pin-form" onsubmit="verifyRecoveryPin(event)" class="space-y-3">
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Master Recovery PIN</label>
-                    <input type="password" id="recovery-pin" required maxlength="4" placeholder="••••" class="w-full px-4 py-2.5 text-center text-lg tracking-widest border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none font-mono">
+                    <label class="block text-xs font-semibold text-slate-700 mb-1 text-center">Master Recovery PIN</label>
+                    <input type="password" id="recovery-pin" required maxlength="4" placeholder="••••" oninput="checkAutoUnlockPin(this.value)" class="w-full px-4 py-3 text-center text-xl tracking-widest border border-slate-300 rounded-xl focus:ring-2 focus:ring-amber-500 outline-none font-mono">
                 </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">New Admin Username</label>
-                    <input type="text" id="recovery-new-user" required value="admin" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm outline-none focus:ring-2 focus:ring-amber-500">
-                </div>
-                <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">New Admin Password</label>
-                    <input type="password" id="recovery-new-pass" required placeholder="Enter new password" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm outline-none focus:ring-2 focus:ring-amber-500">
-                </div>
-                <div class="flex gap-2 pt-2">
-                    <button type="button" onclick="closeForgotPasswordModal()" class="flex-1 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl transition">Cancel</button>
-                    <button type="submit" class="flex-1 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-xl transition">Update Password</button>
+                <div class="flex gap-2 pt-1">
+                    <button type="button" onclick="closeForgotPasswordModal()" class="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl transition">Cancel</button>
+                    <button type="submit" class="flex-1 py-2.5 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-xl transition">Show User & Password</button>
                 </div>
             </form>
+
+            <!-- Step 2: Revealed Credentials Box (Shown once 8317 is entered) -->
+            <div id="recovered-credentials-box" class="hidden space-y-4">
+                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3.5 space-y-2.5">
+                    <div class="flex items-center justify-between border-b border-emerald-200 pb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-900 flex items-center gap-1.5">
+                            <i class="ph-fill ph-lock-key-open text-emerald-600 text-base"></i> System User Credentials
+                        </span>
+                        <span class="text-[11px] text-emerald-700 font-semibold">Click "Fill Login" to use</span>
+                    </div>
+                    <div id="recovered-users-list" class="space-y-2 max-h-56 overflow-y-auto pr-1">
+                        <!-- Populated dynamically with Username & Password -->
+                    </div>
+                </div>
+
+                <!-- Optional Reset Admin Password Section -->
+                <details class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs">
+                    <summary class="font-bold text-slate-700 cursor-pointer select-none flex items-center justify-between">
+                        <span>Want to change Admin Username / Password?</span>
+                        <i class="ph ph-caret-down"></i>
+                    </summary>
+                    <form onsubmit="handlePasswordRecovery(event)" class="space-y-2.5 mt-3 pt-2 border-t border-slate-200">
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-600 mb-1">New Admin Username</label>
+                            <input type="text" id="recovery-new-user" required value="admin" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:ring-2 focus:ring-amber-500 bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-600 mb-1">New Admin Password</label>
+                            <input type="text" id="recovery-new-pass" required placeholder="Enter new password" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs outline-none focus:ring-2 focus:ring-amber-500 bg-white">
+                        </div>
+                        <button type="submit" class="w-full py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-lg transition">Save New Admin Credentials</button>
+                    </form>
+                </details>
+
+                <button type="button" onclick="closeForgotPasswordModal()" class="w-full py-2.5 bg-slate-900 hover:bg-black text-white text-xs font-bold rounded-xl transition">
+                    Close Window
+                </button>
+            </div>
         </div>
     </div>
 
@@ -946,7 +1019,7 @@
         </div>
     </div>
 
-    <!-- Printable Gatepass View (Logo replaced with Red Text) -->
+    <!-- Printable Gatepass View -->
     <div id="gatepass-print-view" class="bg-white text-black font-sans">
         <div class="text-center mb-6 border-b-2 border-black pb-4">
             <div class="flex justify-center mb-2">
@@ -1083,21 +1156,20 @@
         let currentUsername = null;
         let streamRef = null;
 
+        // Always open the Login Screen first when opening the link
         function checkAuth() {
-            const savedRole = localStorage.getItem(AUTH_KEY);
-            const savedUser = localStorage.getItem(LOGGED_USER_KEY);
-            if ((savedRole === 'admin' || savedRole === 'manager') && savedUser) {
-                currentUserRole = savedRole;
-                currentUsername = savedUser;
-                showApp();
-            } else {
-                document.getElementById('login-screen').classList.remove('hidden');
-                document.getElementById('app-container').classList.add('hidden');
-                document.getElementById('app-container').classList.remove('flex');
-            }
+            currentUserRole = null;
+            currentUsername = null;
+            localStorage.removeItem(AUTH_KEY);
+            localStorage.removeItem(LOGGED_USER_KEY);
+
+            loadUsers();
+            document.getElementById('login-screen').classList.remove('hidden');
+            document.getElementById('app-container').classList.add('hidden');
+            document.getElementById('app-container').classList.remove('flex');
         }
 
-        // Highlight and fill quick login role buttons
+        // Highlight role buttons on Login Screen
         function selectLoginRole(role) {
             const adminBtn = document.getElementById('role-btn-admin');
             const managerBtn = document.getElementById('role-btn-manager');
@@ -1118,9 +1190,10 @@
 
                 const adminAccount = usersList.find(u => u.role === 'admin') || { username: 'admin', password: 'admin123' };
                 document.getElementById('login-user').value = adminAccount.username || 'admin';
-                document.getElementById('login-pass').value = adminAccount.password || 'admin123';
+                document.getElementById('login-pass').value = '';
+                document.getElementById('login-pass').focus();
                 if (statusMsg) {
-                    statusMsg.textContent = "✓ Admin selected — Click 'Login to System' below";
+                    statusMsg.textContent = "✓ Admin selected — Enter password & click Login";
                     statusMsg.classList.remove('hidden');
                 }
             } else {
@@ -1132,9 +1205,10 @@
 
                 const managerAccount = usersList.find(u => u.role === 'manager') || { username: 'manager', password: 'manager123' };
                 document.getElementById('login-user').value = managerAccount.username || 'manager';
-                document.getElementById('login-pass').value = managerAccount.password || 'manager123';
+                document.getElementById('login-pass').value = '';
+                document.getElementById('login-pass').focus();
                 if (statusMsg) {
-                    statusMsg.textContent = "✓ Store Manager selected — Click 'Login to System' below";
+                    statusMsg.textContent = "✓ Store Manager selected — Enter password & click Login";
                     statusMsg.classList.remove('hidden');
                 }
             }
@@ -1184,11 +1258,13 @@
             showToast("Logged out successfully");
         }
 
-        // --- Forgot Password Recovery Functions ---
+        // --- Forgot Password Recovery Functions (PIN 8317 -> Show User & Password) ---
         function openForgotPasswordModal() {
             document.getElementById('recovery-pin').value = '';
-            document.getElementById('recovery-new-pass').value = '';
             document.getElementById('recovery-error').classList.add('hidden');
+            document.getElementById('recovery-pin-form').classList.remove('hidden');
+            document.getElementById('recovered-credentials-box').classList.add('hidden');
+            document.getElementById('recovery-subtitle').textContent = 'Enter Master Recovery PIN (8317) to view credentials';
             document.getElementById('forgot-password-modal').classList.remove('hidden');
             document.getElementById('recovery-pin').focus();
         }
@@ -1197,35 +1273,95 @@
             document.getElementById('forgot-password-modal').classList.add('hidden');
         }
 
-        function handlePasswordRecovery(e) {
+        // Automatically unlock as soon as user types 8317
+        function checkAutoUnlockPin(val) {
+            if (val.trim() === '8317') {
+                revealRecoveredCredentials();
+            }
+        }
+
+        function verifyRecoveryPin(e) {
             e.preventDefault();
             const pin = document.getElementById('recovery-pin').value.trim();
-            const newUser = document.getElementById('recovery-new-user').value.trim();
-            const newPass = document.getElementById('recovery-new-pass').value.trim();
-
             if (pin === '8317') {
-                loadUsers();
-                let adminIndex = usersList.findIndex(u => u.role === 'admin');
-                
-                if (adminIndex > -1) {
-                    usersList[adminIndex].username = newUser;
-                    usersList[adminIndex].password = newPass;
-                } else {
-                    usersList.push({ id: 'USR-ADMIN', username: newUser, password: newPass, role: 'admin', created: new Date().toISOString().split('T')[0] });
-                }
-                saveUsers();
-
-                closeForgotPasswordModal();
-                showToast("Admin password successfully reset! Please login with your new credentials.");
-                
-                document.getElementById('login-user').value = newUser;
-                document.getElementById('login-pass').value = newPass;
-                selectLoginRole('admin');
+                revealRecoveredCredentials();
             } else {
                 document.getElementById('recovery-error').classList.remove('hidden');
                 document.getElementById('recovery-pin').value = '';
                 document.getElementById('recovery-pin').focus();
             }
+        }
+
+        function revealRecoveredCredentials() {
+            loadUsers();
+            document.getElementById('recovery-error').classList.add('hidden');
+            document.getElementById('recovery-pin-form').classList.add('hidden');
+            document.getElementById('recovered-credentials-box').classList.remove('hidden');
+            document.getElementById('recovery-subtitle').textContent = 'PIN Verified! Below are your active system usernames & passwords:';
+
+            const listContainer = document.getElementById('recovered-users-list');
+            listContainer.innerHTML = '';
+
+            usersList.forEach(u => {
+                const roleLabel = u.role === 'admin' ? 'Admin' : 'Store Manager';
+                const roleBadgeClass = u.role === 'admin'
+                    ? 'bg-purple-100 text-purple-800 border-purple-200'
+                    : 'bg-blue-100 text-blue-800 border-blue-200';
+
+                const safeUser = u.username.replace(/'/g, "\\'");
+                const safePass = u.password.replace(/'/g, "\\'");
+
+                const card = document.createElement('div');
+                card.className = 'bg-white p-3 rounded-lg border border-emerald-200 shadow-sm flex items-center justify-between gap-2';
+                card.innerHTML = `
+                    <div class="space-y-1 text-xs">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase border ${roleBadgeClass}">${roleLabel}</span>
+                        </div>
+                        <p class="text-slate-700">Username: <strong class="font-mono text-slate-900 select-all">${u.username}</strong></p>
+                        <p class="text-slate-700">Password: <strong class="font-mono text-rose-600 bg-rose-50 px-1.5 py-0.5 rounded border border-rose-200 select-all">${u.password}</strong></p>
+                    </div>
+                    <button type="button" onclick="fillRecoveredLogin('${safeUser}', '${safePass}')" class="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-lg transition shrink-0 shadow-sm flex items-center gap-1">
+                        <i class="ph-fill ph-sign-in"></i> Fill Login
+                    </button>
+                `;
+                listContainer.appendChild(card);
+            });
+
+            const adminUser = usersList.find(u => u.role === 'admin');
+            if (adminUser) {
+                document.getElementById('recovery-new-user').value = adminUser.username;
+                document.getElementById('recovery-new-pass').value = adminUser.password;
+            }
+        }
+
+        function fillRecoveredLogin(username, password) {
+            document.getElementById('login-user').value = username;
+            document.getElementById('login-pass').value = password;
+            closeForgotPasswordModal();
+            showToast(`Credentials filled for "${username}". Click Login to continue!`);
+        }
+
+        function handlePasswordRecovery(e) {
+            e.preventDefault();
+            const newUser = document.getElementById('recovery-new-user').value.trim();
+            const newPass = document.getElementById('recovery-new-pass').value.trim();
+
+            loadUsers();
+            let adminIndex = usersList.findIndex(u => u.role === 'admin');
+            
+            if (adminIndex > -1) {
+                usersList[adminIndex].username = newUser;
+                usersList[adminIndex].password = newPass;
+            } else {
+                usersList.push({ id: 'USR-ADMIN', username: newUser, password: newPass, role: 'admin', created: new Date().toISOString().split('T')[0] });
+            }
+            saveUsers();
+
+            revealRecoveredCredentials();
+            document.getElementById('login-user').value = newUser;
+            document.getElementById('login-pass').value = newPass;
+            showToast("Admin credentials updated and filled into login form!");
         }
 
         function showApp() {
@@ -1257,12 +1393,10 @@
                 manageModelsBtn.classList.remove('flex');
                 inTabManageBtn.classList.add('hidden');
                 inTabManageBtn.classList.remove('flex');
-                if(!document.getElementById('tab-approvals').classList.contains('hidden') || !document.getElementById('tab-user-management').classList.contains('hidden')) {
-                    switchTab('dashboard');
-                }
             }
             
             initApp();
+            switchTab('dashboard');
         }
 
         async function initApp() {
@@ -1274,6 +1408,7 @@
             renderTable();
             renderUsersTable();
             updateMaterialOutSelect();
+            renderStoreDispatchQueue();
             updateStats();
             checkLowStockLevels();
             updateDriveSyncBadge();
@@ -1513,6 +1648,7 @@
                     renderUsersTable();
                     updateStats();
                     updateMaterialOutSelect();
+                    renderStoreDispatchQueue();
                     checkLowStockLevels();
 
                     const nowStr = new Date().toISOString().split('T')[0] + ' ' + new Date().toLocaleTimeString();
@@ -1549,6 +1685,7 @@
                 "Received From (Source)": item.source || "",
                 "Date Received": item.dateIn || "",
                 "Accessories": item.accessories || "",
+                "Gatepass No": item.gpNo || "",
                 "Dispatch Mode": item.dispatchMode || "",
                 "Courier Partner": item.courierName || "",
                 "AWB / Tracking No": item.awb || "",
@@ -1874,7 +2011,7 @@
             const titles = {
                 'dashboard': 'Inventory Dashboard',
                 'material-in': 'Receive Material',
-                'material-out': 'Dispatch Material',
+                'material-out': 'Dispatch Material & Gatepass Print',
                 'dispatch-history': 'Dispatch History Log',
                 'approvals': 'Dispatch Approvals',
                 'user-management': 'User Accounts Management'
@@ -1889,6 +2026,7 @@
                 populateModelDropdowns();
             } else if (tabId === 'material-out') {
                 updateMaterialOutSelect();
+                renderStoreDispatchQueue();
             } else if (tabId === 'dispatch-history') {
                 renderDispatchHistory();
             } else if (tabId === 'approvals') {
@@ -2101,7 +2239,7 @@
                 if (isOut) {
                     statusBadge = `<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold bg-amber-100 text-amber-800 border border-amber-200">${item.dispatchMode === 'Courier' ? 'COURIER OUT' : 'DISPATCHED'}</span>`;
                 } else if (isPending) {
-                    statusBadge = `<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold bg-purple-100 text-purple-800 border border-purple-200">PENDING</span>`;
+                    statusBadge = `<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold bg-purple-100 text-purple-800 border border-purple-200">PENDING APPROVAL</span>`;
                 } else {
                     statusBadge = `<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">IN STOCK</span>`;
                 }
@@ -2121,6 +2259,11 @@
                     <td class="px-6 py-4">${activityInfo}</td>
                     <td class="px-6 py-4 text-right">
                         <div class="flex items-center justify-end gap-1.5 opacity-90 group-hover:opacity-100 transition-opacity">
+                            ${isOut ? `
+                                <button type="button" onclick="openGatepassById('${item.id}')" class="px-2.5 py-1 bg-slate-900 text-white hover:bg-black rounded text-xs font-semibold flex items-center gap-1 transition" title="Print Gatepass">
+                                    <i class="ph ph-printer"></i> Gatepass
+                                </button>
+                            ` : ''}
                             <button type="button" onclick="openTrackModal('${item.id}')" class="p-1.5 text-blue-600 hover:bg-blue-50 rounded" title="Track Asset Journey">
                                 <i class="ph ph-compass text-lg"></i>
                             </button>
@@ -2139,6 +2282,55 @@
                             ` : ''}
                         </div>
                     </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Render Dispatch Status & Gatepass Print Queue inside Material Out section for Store Manager & Admin
+        function renderStoreDispatchQueue() {
+            const tbody = document.getElementById('store-dispatch-queue-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            const queueItems = inventory
+                .filter(i => i.status === 'Pending Dispatch' || i.status === 'Out')
+                .sort((a, b) => new Date(b.dateOut || 0) - new Date(a.dateOut || 0));
+
+            if (queueItems.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-10 text-center text-slate-500 bg-slate-50 text-sm">No pending or approved dispatch requests yet.</td></tr>`;
+                return;
+            }
+
+            queueItems.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 transition-colors';
+
+                const isApproved = item.status === 'Out';
+
+                const statusHtml = isApproved
+                    ? `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200"><i class="ph-fill ph-check-circle"></i> Approved by Admin</span>`
+                    : `<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-bold bg-amber-100 text-amber-800 border border-amber-200"><i class="ph-fill ph-clock"></i> Waiting Admin Approval</span>`;
+
+                const actionHtml = isApproved
+                    ? `<button type="button" onclick="openGatepassById('${item.id}')" class="px-3.5 py-2 bg-slate-900 hover:bg-black text-white rounded-xl font-bold text-xs inline-flex items-center gap-1.5 shadow-sm transition">
+                            <i class="ph ph-printer text-base"></i> Print Gatepass
+                       </button>`
+                    : `<span class="text-xs text-slate-400 italic">Print locked until Admin approves</span>`;
+
+                tr.innerHTML = `
+                    <td class="px-6 py-4">
+                        <span class="font-bold text-slate-900 block text-sm">${item.name}</span>
+                        <span class="text-xs font-mono text-slate-500">S/N: ${item.sn}</span>
+                        ${item.gpNo ? `<span class="block text-[11px] font-mono text-emerald-700 font-semibold mt-0.5">GP No: ${item.gpNo}</span>` : ''}
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="font-semibold text-slate-800 block text-sm">${item.company || 'N/A'}</span>
+                        <span class="text-xs text-slate-500">Location: ${item.dispatchTo || 'N/A'} | Mode: ${item.dispatchMode || 'Direct'}</span>
+                        <span class="block text-[11px] text-slate-400">Date: ${formatDate(item.dateOut)}</span>
+                    </td>
+                    <td class="px-6 py-4">${statusHtml}</td>
+                    <td class="px-6 py-4 text-right">${actionHtml}</td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -2187,6 +2379,7 @@
                     <td class="px-6 py-4">
                         <span class="font-semibold text-slate-900 block">${item.name}</span>
                         <span class="text-xs font-mono text-slate-500">S/N: ${item.sn}</span>
+                        ${item.gpNo ? `<span class="block text-[11px] font-mono text-emerald-700 font-semibold">GP: ${item.gpNo}</span>` : ''}
                     </td>
                     <td class="px-6 py-4">
                         <span class="font-bold text-slate-800 block">${item.company || 'N/A'}</span>
@@ -2194,8 +2387,11 @@
                     </td>
                     <td class="px-6 py-4">${modeBadge}</td>
                     <td class="px-6 py-4 text-sm text-slate-700">${formatDate(item.dateOut)}</td>
-                    <td class="px-6 py-4 text-right">
-                        <button type="button" onclick="openDispatchDetailsModal('${item.id}')" class="px-3 py-1.5 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded font-semibold text-xs transition mr-1">
+                    <td class="px-6 py-4 text-right space-x-1">
+                        <button type="button" onclick="openGatepassById('${item.id}')" class="px-3 py-1.5 bg-slate-900 text-white hover:bg-black rounded-lg font-semibold text-xs inline-flex items-center gap-1 transition">
+                            <i class="ph ph-printer"></i> Print Gatepass
+                        </button>
+                        <button type="button" onclick="openDispatchDetailsModal('${item.id}')" class="px-3 py-1.5 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg font-semibold text-xs inline-flex items-center gap-1 transition">
                             <i class="ph ph-file-text"></i> Details / Proof
                         </button>
                     </td>
@@ -2219,6 +2415,7 @@
                 <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
                     <h4 class="font-bold text-slate-900 text-base">${item.name}</h4>
                     <p class="text-xs font-mono text-slate-600">Serial Number: <strong>${item.sn}</strong></p>
+                    <p class="text-xs font-mono text-emerald-700">Gatepass Number: <strong>${item.gpNo || 'N/A'}</strong></p>
                     <p class="text-xs text-slate-600">Received Source: <strong>${item.source || 'N/A'}</strong></p>
                     <p class="text-xs text-slate-600">Accessories: <strong>${item.accessories || 'None'}</strong></p>
                 </div>
@@ -2255,10 +2452,32 @@
         function updateStats() {
             const inStock = inventory.filter(i => i.status === 'In').length;
             const dispatched = inventory.filter(i => i.status === 'Out').length;
+            const pendingCount = inventory.filter(i => i.status === 'Pending Dispatch').length;
             
             document.getElementById('stat-total').textContent = inventory.length;
             document.getElementById('stat-in').textContent = inStock;
             document.getElementById('stat-out').textContent = dispatched;
+
+            // Update sidebar badges
+            const approvalsBadge = document.getElementById('nav-approvals-badge');
+            if (approvalsBadge) {
+                if (pendingCount > 0) {
+                    approvalsBadge.textContent = pendingCount;
+                    approvalsBadge.classList.remove('hidden');
+                } else {
+                    approvalsBadge.classList.add('hidden');
+                }
+            }
+
+            const outBadge = document.getElementById('nav-out-badge');
+            if (outBadge) {
+                if (dispatched > 0) {
+                    outBadge.textContent = dispatched;
+                    outBadge.classList.remove('hidden');
+                } else {
+                    outBadge.classList.add('hidden');
+                }
+            }
 
             const categoryData = {};
             const categories = Object.keys(catalog);
@@ -2429,6 +2648,7 @@
                         accessories: 'Standard',
                         dateIn: todayStr,
                         status: 'In',
+                        gpNo: null,
                         dispatchMode: 'Direct',
                         courierName: null,
                         awb: null,
@@ -2481,6 +2701,7 @@
                 accessories: accessories,
                 dateIn: dateIn,
                 status: 'In',
+                gpNo: null,
                 dispatchMode: 'Direct',
                 courierName: null,
                 awb: null,
@@ -2537,11 +2758,12 @@
             inventory[itemIndex].dateOut = dateOut;
 
             saveData();
-            showToast("Dispatch requested & synced!");
+            showToast("Dispatch requested! Waiting for Admin approval to unlock Gatepass Print.");
             this.reset();
             document.querySelector('input[name="dispatch-mode"][value="Direct"]').checked = true;
             toggleDispatchMode();
             updateMaterialOutSelect();
+            renderStoreDispatchQueue();
             updateStats();
         });
 
@@ -2558,6 +2780,7 @@
             const itemIndex = inventory.findIndex(i => i.id === id);
             if(itemIndex > -1) {
                 inventory[itemIndex].status = 'In';
+                inventory[itemIndex].gpNo = null;
                 inventory[itemIndex].dispatchMode = 'Direct';
                 inventory[itemIndex].courierName = null;
                 inventory[itemIndex].awb = null;
@@ -2573,6 +2796,7 @@
                 
                 saveData();
                 renderTable();
+                renderStoreDispatchQueue();
                 updateStats();
                 checkLowStockLevels();
                 showToast("Item returned to stock & synced.");
@@ -2664,6 +2888,7 @@
             const itemIndex = inventory.findIndex(i => i.id === id);
             if(itemIndex > -1) {
                 inventory[itemIndex].status = 'In';
+                inventory[itemIndex].gpNo = null;
                 inventory[itemIndex].dispatchMode = 'Direct';
                 inventory[itemIndex].courierName = null;
                 inventory[itemIndex].awb = null;
@@ -2677,6 +2902,7 @@
                 inventory[itemIndex].dateOut = null;
                 saveData();
                 renderApprovals();
+                renderStoreDispatchQueue();
                 updateStats();
                 checkLowStockLevels();
                 showToast("Dispatch rejected. Item is back in stock.", "error");
@@ -2755,15 +2981,33 @@
                 inventory[itemIndex].status = 'Out';
                 inventory[itemIndex].verificationPhoto = photoDataUrl;
                 inventory[itemIndex].approvalNotes = approvalNotes;
+                if (!inventory[itemIndex].gpNo) {
+                    inventory[itemIndex].gpNo = "GP-" + Math.floor(10000 + Math.random() * 90000);
+                }
                 saveData();
                 
                 renderApprovals();
+                renderStoreDispatchQueue();
                 updateStats();
                 checkLowStockLevels();
-                showToast("Dispatch Approved & Synced! Gatepass Generated.");
+                showToast("Dispatch Approved! Gatepass is now available for Store Manager in Material Out.");
                 
                 generateGatepass(inventory[itemIndex]);
             }
+        }
+
+        function openGatepassById(id) {
+            const item = inventory.find(i => i.id === id);
+            if (!item) return;
+            if (item.status !== 'Out') {
+                showToast("Gatepass can only be printed after Admin approves the dispatch.", "error");
+                return;
+            }
+            if (!item.gpNo) {
+                item.gpNo = "GP-" + Math.floor(10000 + Math.random() * 90000);
+                saveData();
+            }
+            generateGatepass(item);
         }
 
         function openTrackModal(id) {
@@ -2840,8 +3084,8 @@
         }
 
         function generateGatepass(item) {
-            const gpNo = "GP-" + Math.floor(10000 + Math.random() * 90000);
-            const dateStr = formatDate(new Date().toISOString());
+            const gpNo = item.gpNo || ("GP-" + Math.floor(10000 + Math.random() * 90000));
+            const dateStr = formatDate(item.dateOut || new Date().toISOString());
 
             document.getElementById('print-gp-no').textContent = gpNo;
             document.getElementById('print-date').textContent = dateStr;
@@ -2871,7 +3115,6 @@
 
         function closeGatepassPreview() {
             document.getElementById('gatepass-preview-modal').classList.add('hidden');
-            switchTab('dashboard'); 
         }
 
         window.addEventListener('DOMContentLoaded', checkAuth);
