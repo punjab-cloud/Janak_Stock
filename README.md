@@ -1,4 +1,5 @@
-JANAK POSITIONING
+JANAK
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,10 +23,10 @@ JANAK POSITIONING
             background-color: #f8fafc;
         }
         
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        /* Custom Scrollbar for the Main Content Area */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
         /* Print Styles */
@@ -104,7 +105,7 @@ JANAK POSITIONING
     </div>
 
     <!-- App Container -->
-    <div id="app-container" class="hidden w-full h-full flex-col md:flex-row">
+    <div id="app-container" class="hidden w-full h-full flex-col md:flex-row relative">
         
         <!-- Sidebar -->
         <aside class="w-full md:w-64 bg-slate-900 text-white flex flex-col shadow-xl z-20 shrink-0">
@@ -167,7 +168,7 @@ JANAK POSITIONING
             </div>
         </aside>
 
-        <!-- Main Content -->
+        <!-- Main Content Area -->
         <main class="flex-1 flex flex-col h-full overflow-hidden relative bg-slate-50">
             
             <!-- Header -->
@@ -198,11 +199,11 @@ JANAK POSITIONING
                 </div>
             </header>
 
-            <!-- Scrollable Content Area -->
-            <div class="flex-1 overflow-y-auto p-4 md:p-8">
+            <!-- Scrollable Viewport Area (Where the content actually scrolls) -->
+            <div id="main-scroll-area" class="flex-1 overflow-y-auto overflow-x-hidden p-4 md:p-8 relative">
                 
                 <!-- Tab: Dashboard -->
-                <div id="tab-dashboard" class="tab-content max-w-6xl mx-auto block space-y-6">
+                <div id="tab-dashboard" class="tab-content max-w-6xl mx-auto block space-y-6 pb-12">
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
                         <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                             <div class="flex justify-between items-start">
@@ -290,7 +291,7 @@ JANAK POSITIONING
                 </div>
 
                 <!-- Tab: Material In -->
-                <div id="tab-material-in" class="tab-content max-w-2xl mx-auto hidden">
+                <div id="tab-material-in" class="tab-content max-w-2xl mx-auto hidden pb-12">
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
                         <div class="flex items-center justify-between mb-6">
                             <div class="flex items-center gap-3">
@@ -349,7 +350,7 @@ JANAK POSITIONING
                 </div>
 
                 <!-- Tab: Material Out -->
-                <div id="tab-material-out" class="tab-content max-w-2xl mx-auto hidden">
+                <div id="tab-material-out" class="tab-content max-w-2xl mx-auto hidden pb-12">
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
                         <div class="flex items-center gap-3 mb-6">
                             <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center">
@@ -449,7 +450,7 @@ JANAK POSITIONING
                 </div>
 
                 <!-- Tab: Dispatch History -->
-                <div id="tab-dispatch-history" class="tab-content max-w-6xl mx-auto hidden">
+                <div id="tab-dispatch-history" class="tab-content max-w-6xl mx-auto hidden pb-12">
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
                         <div class="px-6 py-4 border-b border-slate-200 bg-slate-50 flex flex-col md:flex-row justify-between items-center gap-4">
                             <div>
@@ -488,7 +489,7 @@ JANAK POSITIONING
                 </div>
 
                 <!-- Tab: Approvals -->
-                <div id="tab-approvals" class="tab-content max-w-4xl mx-auto hidden">
+                <div id="tab-approvals" class="tab-content max-w-4xl mx-auto hidden pb-12">
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
                         <div class="px-6 py-4 border-b border-slate-200 bg-slate-50 flex items-center gap-3">
                             <i class="ph-fill ph-shield-check text-blue-600 text-xl"></i>
@@ -512,7 +513,7 @@ JANAK POSITIONING
                 </div>
 
                 <!-- Tab: User Management -->
-                <div id="tab-user-management" class="tab-content max-w-5xl mx-auto hidden space-y-6">
+                <div id="tab-user-management" class="tab-content max-w-5xl mx-auto hidden space-y-6 pb-12">
                     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
                         <div class="flex items-center gap-3 mb-6">
                             <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center">
